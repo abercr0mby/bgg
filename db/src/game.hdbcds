@@ -16,5 +16,23 @@ context game {
    entity ProductCategories {
       key productId  : Integer;
       key categoryId : Integer;
-   }
+          products   : association[*] to Product  on products.id = productId;
+          categories : association[*] to Category on categories.id = categoryId;
+   };
+
+   view ProductsWithCategories as
+      select from Product
+      {
+         name as productName,
+         categories.categories.id   as categoryId,
+         categories.categories.name as categoryName
+      };
+
+   view CategoriesWithProducts as
+      select from Category
+      {
+         name as categoryName,
+         categorizes.products.id   as productId,
+         categorizes.products.name as productName
+      };
 };
