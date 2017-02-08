@@ -1,0 +1,8 @@
+service {
+	"bgg.db::game.Product" as "prods";
+	"bgg.db::game.Category" as "cats";
+	association "Product_Categories"
+	principal "prods"("id") multiplicity "*"
+	dependent "cats"("id") multiplicity "*"
+	over "sample.odata::ProductCategories" principal ("ProductId") dependent ("CategoryId");
+}

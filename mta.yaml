@@ -9,6 +9,13 @@ modules:
    requires:
     - name: hdi-container
 
+ - name: js
+   type: nodejs
+   path: js
+   requires:
+   - name: db
+   - name: hdi-container
+
 resources:
  - name: hdi-container
    properties:

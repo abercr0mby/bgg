@@ -1,0 +1,3 @@
+service {
+	"bgg.db::game.Product" as "prods" with ("id", "name");
+}

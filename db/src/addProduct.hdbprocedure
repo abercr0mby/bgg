@@ -1,5 +1,5 @@
 PROCEDURE "bgg.db::addProduct" (
-	IN im_productId INTEGER, im_productName NVARCHAR(100), im_productThumbnail NVARCHAR(100), im_description NVARCHAR(200),
+	IN im_productId INTEGER, im_productName NVARCHAR(100), im_productThumbnail NVARCHAR(100), im_description NVARCHAR(200), im_categoryName NVARCHAR(200),
 	OUT ex_error NVARCHAR(100))
    LANGUAGE SQLSCRIPT
    SQL SECURITY INVOKER AS
@@ -7,26 +7,35 @@ PROCEDURE "bgg.db::addProduct" (
    -- READS SQL DATA AS     
 BEGIN
 declare noc integer;
+declare categoryId integer;
 select count(*) into noc 
 	from "bgg.db::game.Product"
 	where "name" = im_productName;
 if :noc > 0 then
 	ex_error := 'ERROR: Product ' || :im_productName || ' exists!';
 else
-	insert into "bgg.db::game.Product"
-		values (im_productId, im_productName, im_productThumbnail, im_description);
-
-/*
 	select count(*) into noc 
 		from "bgg.db::game.Category"
-		where "name" = im_categoryId;
+		where "name" = im_categoryName;
 	if :noc = 0 then
-		ex_error = 'ERROR: Category ' || :im_categoryId || ' Does not exist!';
-	else
-		insert into "bgg.db::game.Product"
-			values (im_productId, im_productName, im_productThumbnail);
+		insert into "bgg.db::game.Category" ("name")               
+			values (im_categoryName);
 	end if;
-*/
+
+	select top 1 "id" into categoryId
+		from "bgg.db::game.Category"
+		where "name" = im_categoryName;
+	
+	if :im_productId = 0 then
+	insert into "bgg.db::game.Product" ("name", "thumbnail", "description")
+		values (im_productName, im_productThumbnail, im_description);
+	else
+	insert into "bgg.db::game.Product"
+		values (im_productId, im_productName, im_productThumbnail, im_description);
+	end if;	
+	
+	insert into "bgg.db::game.ProductCategories"
+		values (im_productId, categoryId);
 
 end if;
 END
