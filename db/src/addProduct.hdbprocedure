@@ -8,24 +8,25 @@ PROCEDURE "bgg.db::addProduct" (
 BEGIN
 declare noc integer;
 declare categoryId integer;
+declare productId integer;
 select count(*) into noc 
 	from "bgg.db::game.Product"
 	where "name" = im_productName;
 if :noc > 0 then
 	ex_error := 'ERROR: Product ' || :im_productName || ' exists!';
 else
-	select count(*) into noc 
+	select count(*) into noc
 		from "bgg.db::game.Category"
 		where "name" = im_categoryName;
 	if :noc = 0 then
 		insert into "bgg.db::game.Category" ("name")               
 			values (im_categoryName);
 	end if;
-
+	
 	select top 1 "id" into categoryId
 		from "bgg.db::game.Category"
-		where "name" = im_categoryName;
-	
+		where "name" = im_categoryName;				
+
 	if :im_productId = 0 then
 	insert into "bgg.db::game.Product" ("name", "thumbnail", "description")
 		values (im_productName, im_productThumbnail, im_description);
@@ -34,8 +35,12 @@ else
 		values (im_productId, im_productName, im_productThumbnail, im_description);
 	end if;	
 	
-	insert into "bgg.db::game.ProductCategories"
-		values (im_productId, categoryId);
+	select top 1 "id" into productId
+		from "bgg.db::game.Product"
+		where "name" = im_productName;	
+	
+	insert into "bgg.db::game.ProductCategories" ("productId", "categoryId")              
+		values (productId, categoryId);
 
 end if;
 END
