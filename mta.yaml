@@ -8,6 +8,9 @@ modules:
    path: db
    requires:
     - name: hdi-container
+      properties:
+         TARGET_CONTAINER: ~{hdi-container-name}
+    - name: CrossSchemaService
 
  - name: js
    type: nodejs
@@ -22,3 +25,7 @@ resources:
       hdi-container-name: ${service-name}
    type: com.sap.xs.hdi-container
 
+ - name: CrossSchemaService
+   type: org.cloudfoundry.existing-service
+   parameters:
+      service-name: bgg-ups-dev

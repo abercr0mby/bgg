@@ -1,0 +1,24 @@
+{
+  "bgg-ups-dev": {
+    "object_owner" : {
+      "object_privileges":[ 
+        { 
+          "schema":"SYS",
+          "name": "DUMMY",
+          "type": "TABLE",
+          "privileges":["SELECT"]
+        }  
+      ]
+    },
+    "application_user" : {
+      "object_privileges":[ 
+        { 
+          "schema":"SYS",
+          "name": "DUMMY",
+          "type": "TABLE",          
+          "privileges":["SELECT"]
+        }
+      ]
+    }
+  }
+}
