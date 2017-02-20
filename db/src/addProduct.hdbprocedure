@@ -10,36 +10,36 @@ declare noc integer;
 declare categoryId integer;
 declare productId integer;
 select count(*) into noc 
-	from "bgg.db::game.Product"
+	from "bgg.db::game.product"
 	where "name" = im_productName;
 if :noc > 0 then
 	ex_error := 'ERROR: Product ' || :im_productName || ' exists!';
 else
 	select count(*) into noc
-		from "bgg.db::game.Category"
+		from "bgg.db::game.category"
 		where "name" = im_categoryName;
 	if :noc = 0 then
-		insert into "bgg.db::game.Category" ("name")               
+		insert into "bgg.db::game.category" ("name")               
 			values (im_categoryName);
 	end if;
 	
 	select top 1 "id" into categoryId
-		from "bgg.db::game.Category"
+		from "bgg.db::game.category"
 		where "name" = im_categoryName;				
 
 	if :im_productId = 0 then
-	insert into "bgg.db::game.Product" ("name", "thumbnail", "description")
+	insert into "bgg.db::game.product" ("name", "thumbnail", "description")
 		values (im_productName, im_productThumbnail, im_description);
 	else
-	insert into "bgg.db::game.Product"
+	insert into "bgg.db::game.product"
 		values (im_productId, im_productName, im_productThumbnail, im_description);
 	end if;	
 	
 	select top 1 "id" into productId
-		from "bgg.db::game.Product"
+		from "bgg.db::game.product"
 		where "name" = im_productName;	
 	
-	insert into "bgg.db::game.ProductCategories" ("productId", "categoryId")              
+	insert into "bgg.db::game.productCategories" ("productId", "categoryId")              
 		values (productId, categoryId);
 
 end if;

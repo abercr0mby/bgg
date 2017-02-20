@@ -1,13 +1,13 @@
 procedure "bgg.db::beforeupdate"
-(IN new "bgg.db::game.Product", IN old "bgg.db::game.Product", OUT error "bgg.db::error")
+(IN new "bgg.db::game.product", IN old "bgg.db::game.product", OUT error "bgg.db::error")
 language sqlscript
 sql security invoker as
-idnew INT;
-idold INT;
+idnew string;
+idold string;
 begin
---select id into idnew from :new;
---select id into idold from :old;
-if :idnew <= :idold then
+select "id" into idnew from :new;
+select "id" into idold from :old;
+if idnew >= idold then
 error = select 400 as http_status_code,
 'invalid ID' error_message,
 'the new value must be larger than the previous' detail from "bgg.db::DUMMY";
