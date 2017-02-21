@@ -1,3 +1,0 @@
-service {
-	"bgg.db::game.product" as "prods" update events (before "bgg.db::beforeupdate");
-}

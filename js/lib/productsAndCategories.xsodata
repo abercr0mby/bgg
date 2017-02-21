@@ -1,8 +1,0 @@
-service {
-	"bgg.db::game.product" as "prods" navigates ("product_categories" as "categories");
-	"bgg.db::game.category" as "cats";
-	association "product_categories"
-	principal "prods"("id") multiplicity "*"
-	dependent "cats"("id") multiplicity "*"
-	over "bgg.db::game.productCategories" principal ("productId") dependent ("categoryId");
-}

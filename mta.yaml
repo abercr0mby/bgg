@@ -12,12 +12,10 @@ modules:
          TARGET_CONTAINER: ~{hdi-container-name}
     - name: CrossSchemaService
 
- - name: js
-   type: nodejs
-   path: js
-   requires:
-   - name: db
-   - name: hdi-container
+ 
+
+
+ 
 
 resources:
  - name: hdi-container
