@@ -15,6 +15,9 @@ modules:
  - name: js
    type: nodejs
    path: js
+   requires:
+   - name: db
+   - name: hdi-container   
 
 resources:
  - name: hdi-container

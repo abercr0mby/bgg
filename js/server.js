@@ -19,7 +19,7 @@ var xsjs  = require("sap-xsjs");
 var xsenv = require("sap-xsenv");
 var server = require("http").createServer();
 var express = require("express");
-var node = require("./src/myNode"); 
+var node = require("./lib/myNode"); 
 
 var port = process.env.PORT || 3000;
 
