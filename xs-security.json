@@ -1,0 +1,30 @@
+{
+  "xsappname": "bgg",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.view",
+      "description": "View data"
+    },
+    {
+      "name": "$XSAPPNAME.create",
+      "description": "Create data"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "bggView",
+      "description": "Role for viewing data",
+      "scope-references": [
+        "$XSAPPNAME.view"
+      ]
+    },
+    {
+      "name": "bggCreate",
+      "description": "Role for creating data",
+      "scope-references": [
+        "$XSAPPNAME.create",
+        "$XSAPPNAME.view"
+      ]
+    }
+  ]
+}

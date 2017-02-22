@@ -16,8 +16,9 @@ modules:
    type: nodejs
    path: js
    requires:
+   - name: bgg_uaa 
    - name: db
-   - name: hdi-container   
+   - name: hdi-container 
 
 resources:
  - name: hdi-container
@@ -29,3 +30,8 @@ resources:
    type: org.cloudfoundry.existing-service
    parameters:
       service-name: bgg-ups-dev
+      
+ - name: bgg_uaa
+   type: com.sap.xs.uaa
+   parameters:
+      path: ./xs-security.json

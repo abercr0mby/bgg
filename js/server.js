@@ -24,7 +24,7 @@ var node = require("./lib/myNode");
 var port = process.env.PORT || 3000;
 
 var options = {
-	anonymous : true, // remove to authenticate calls
+	// anonymous : true, // remove to authenticate calls
 	redirectUrl : "/index.xsjs"
 };
 // configure HANA
