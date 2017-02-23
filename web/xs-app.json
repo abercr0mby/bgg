@@ -1,5 +1,16 @@
 {
-  "welcomeFile": "index.html",
-  "authenticationMethod": "route",
-  "routes": []
+"welcomeFile": "index.html",
+"authenticationMethod": "route",
+"routes": [{
+	"source": "(.*)",
+	"destination": "nodejs_handler",
+	"csrfProtection": false,
+	"authenticationType": "xsuaa"
+	},
+	{
+	"source": "(/)",
+	"destination": "nodejs_handler",
+	"csrfProtection": false,
+	"authenticationType": "xsuaa"
+	}]
 }

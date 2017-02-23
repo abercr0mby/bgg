@@ -20,8 +20,14 @@ var xsenv = require("sap-xsenv");
 var server = require("http").createServer();
 var express = require("express");
 var node = require("./lib/myNode"); 
+var xssec = require("sap-xssec");
+
+var passport = require("passport");
+var xsHDBConn = require("sap-hdbext");
 
 var port = process.env.PORT || 3000;
+
+   //passport.use("JWT", new xssec.JWTStrategy(xsenv.getServices({uaa:{tag:"xsuaa"}}).uaa));
 
 var options = {
 	// anonymous : true, // remove to authenticate calls
@@ -45,8 +51,17 @@ var xsjsApp = xsjs(options);
 
 //Create base Express Server app
 var app = express(); 
+
+ //  app.use(passport.initialize());
+ //  app.use(
+	// 	passport.authenticate("JWT", {session: false}),
+	// 	xsHDBConn.middleware()
+	// );
+
 app.use("/node", node());
 app.use(xsjsApp);
+
+
 
 server.on("request", app);
 server.listen(port, function(){

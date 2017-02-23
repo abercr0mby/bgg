@@ -10,12 +10,12 @@ var xsenv = require("sap-xsenv");
 module.exports = function(){
 	var app = express(); 
 
-   passport.use("JWT", new xssec.JWTStrategy(xsenv.getServices({uaa:{tag:"xsuaa"}}).uaa));
+/*   passport.use("JWT", new xssec.JWTStrategy(xsenv.getServices({uaa:{tag:"xsuaa"}}).uaa));
    app.use(passport.initialize());
    app.use(
 		passport.authenticate("JWT", {session: false}),
 		xsHDBConn.middleware()
-	);
+	);*/
 	
 //Hello Router
 	app.route("/")
@@ -50,6 +50,6 @@ module.exports = function(){
 	     } }  );
 	   } );*/
 	});	
-	
+
    return app;
 };
