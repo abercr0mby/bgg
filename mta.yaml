@@ -1,6 +1,6 @@
 _schema-version: '2.0'
 ID: bgg
-version: 0.0.1
+version: 2.0.0
 
 modules:
  - name: db
@@ -14,12 +14,28 @@ modules:
 
  - name: js
    type: nodejs
-   path: js
+   path: js/
+   provides:
+    - name: nodejs
+      properties:
+        service_url: "${default-url}"   
    requires:
-   - name: bgg_uaa 
-   - name: db
-   - name: hdi-container 
+    - name: bgg_uaa 
+    - name: db
+    - name: hdi-container
 
+ - name: web
+   type: html5
+   path: web
+   requires:
+    - name: bgg_uaa
+    - name: nodejs
+      group: destinations
+      properties:
+        name: nodejs_handler
+        url: ~{service_url}
+        forwardAuthToken: true  
+   
 resources:
  - name: hdi-container
    properties:
