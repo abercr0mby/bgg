@@ -4,6 +4,7 @@ var xssec = require("sap-xssec");
 var passport = require("passport");
 var xsHDBConn = require("sap-hdbext");
 var xsenv = require("sap-xsenv");
+var orm = require("./orm");
 var async = require("async");
 
 module.exports = function(){
@@ -31,6 +32,11 @@ module.exports = function(){
 	
 	app.route("/hi").get(function(req, res){
 		res.send("Hiya");	
+	});
+	
+	app.route("/orm").get(function(req, res){
+	    var response = orm();
+		res.send(response);	
 	});
 	
 	app.route("/about").get(function(req, res){
