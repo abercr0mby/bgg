@@ -34,10 +34,7 @@ module.exports = function(){
 		res.send("Hiya");	
 	});
 	
-	app.route("/orm").get(function(req, res){
-	    var response = orm();
-		res.send(response);	
-	});
+	app.route("/product/:productId").get(orm.getProduct);
 	
 	app.route("/about").get(function(req, res){
 		res.send("about");	

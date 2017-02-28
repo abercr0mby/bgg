@@ -2,11 +2,12 @@
   "dependencies": {
     "express": "4.12.3",
     "sap-xsenv": "1.2.4",
-    "sap-xsjs": "1.11.4" ,
-	"async": "latest",
-	"sap-hdbext": "^4.1.3",
-	"sap-e2e-trace": "latest",
-	"passport": "0.2.1"
+    "sap-xsjs": "1.11.4",
+    "async": "latest",
+    "sap-hdbext": "^4.1.3",
+    "sap-e2e-trace": "latest",
+    "sap-cds": "latest",
+    "passport": "0.2.1"
   },
   "devDependencies": {
     "gulp": "3.9.1",
