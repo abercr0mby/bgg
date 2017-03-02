@@ -36,6 +36,7 @@ module.exports = function(){
 	
 	app.route("/product/:productId").get(orm.getProductName);
 	app.route("/changeProduct/:productId/:newDescription").get(orm.changeProduct);
+	app.route("/createProduct/:productId/:name/:description/:thumbnail").get(orm.createProduct);
 	
 	app.route("/about").get(function(req, res){
 		res.send("about");	
