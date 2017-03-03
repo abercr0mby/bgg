@@ -4,7 +4,8 @@ var xssec = require("sap-xssec");
 var passport = require("passport");
 var xsHDBConn = require("sap-hdbext");
 var xsenv = require("sap-xsenv");
-var orm = require("./orm");
+var product = require("./orm/product");
+var thing = require("./orm/thing");
 var async = require("async");
 
 module.exports = function(){
@@ -34,9 +35,14 @@ module.exports = function(){
 		res.send("Hiya");	
 	});
 	
-	app.route("/product/:productId").get(orm.getProductName);
-	app.route("/changeProduct/:productId/:newDescription").get(orm.changeProduct);
-	app.route("/createProduct/:productId/:name/:description/:thumbnail").get(orm.createProduct);
+	app.route("/product/:productId").get(product.getProductName);
+	app.route("/changeProduct/:productId/:newDescription").get(product.changeProduct);
+	app.route("/createProduct/:productId/:catName/:name/:description/:thumbnail").get(product.createProduct);
+	
+	app.route("/thing/:thingId").get(thing.getThingName);
+	app.route("/thing/complex/:thingName").get(thing.getThingComplex);
+	app.route("/changeThing/:productId/:newDescription").get(thing.changeThing);
+	app.route("/createThing/:thingId/:catName/:name/:description/:thumbnail").get(thing.createThing);	
 	
 	app.route("/about").get(function(req, res){
 		res.send("about");	
